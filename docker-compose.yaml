@@ -13,19 +13,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-#  app:
-#    build: .
-#    container_name: swift-api
-#    environment:
-#      DB_HOST: postgres
-#      DB_PORT: 5432
-#      DB_NAME: swift_db
-#      DB_USER: postgres
-#      DB_PASSWORD: postgres
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - postgres
+  app:
+    build: .
+    container_name: swift-api
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/swift_db
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: passwd
+      SWIFT_DATA_FILE_PATH: /data/swiftCodes.xlsx
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
 
 volumes:
   postgres_data:

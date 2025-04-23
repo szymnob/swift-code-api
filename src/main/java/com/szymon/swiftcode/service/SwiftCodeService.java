@@ -2,7 +2,6 @@ package com.szymon.swiftcode.service;
 
 import com.szymon.swiftcode.dto.BranchDTO;
 import com.szymon.swiftcode.dto.CountryISO2CodeDTO;
-import com.szymon.swiftcode.dto.HeadquarterDTO;
 import com.szymon.swiftcode.exceptions.DuplicateResourceException;
 import com.szymon.swiftcode.exceptions.ResourceNotFoundException;
 import com.szymon.swiftcode.mapper.SwiftCodeMapper;
@@ -10,6 +9,7 @@ import com.szymon.swiftcode.model.SwiftCode;
 import com.szymon.swiftcode.repository.SwiftCodeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -55,6 +55,7 @@ public class SwiftCodeService {
     }
 
     //endpoint: delete /api/v1/swiftcode/{swiftCode}
+    @Transactional
     public String deleteSwiftCode(String swiftCode) {
         if (!repository.existsBySwiftCode(swiftCode)) {
             throw new ResourceNotFoundException("SwiftCode", "swiftCode", swiftCode);
@@ -65,6 +66,7 @@ public class SwiftCodeService {
     }
 
     //endpoint: post /api/v1/swiftcode
+    @Transactional
     public String addSwiftCode(BranchDTO branchDTO) {
         String swiftCode = branchDTO.getSwiftCode();
         if (repository.existsBySwiftCode(swiftCode)) {

@@ -1,6 +1,5 @@
 package com.szymon.swiftcode.controller;
 
-import ch.qos.logback.core.net.ObjectWriter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.szymon.swiftcode.dto.BranchDTO;
 import com.szymon.swiftcode.dto.CountryISO2CodeDTO;
@@ -20,7 +19,6 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -70,7 +68,7 @@ class SwiftControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.errors.swiftCode").value("Swift code must be between 8 and 11 characters "));
+                .andExpect(jsonPath("$.errors.swiftCode").value("Swift code must be between 8 and 11 characters"));
     }
 
     @Test

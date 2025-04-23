@@ -1,4 +1,4 @@
-package com.szymon.swiftcode;
+package com.szymon.swiftcode.utils;
 
 import com.szymon.swiftcode.model.SwiftCode;
 import com.szymon.swiftcode.repository.SwiftCodeRepository;
@@ -10,7 +10,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import com.szymon.swiftcode.utils.SwiftCodeParser;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -64,7 +63,7 @@ public class SwiftCodeParserTest {
         assertEquals("TIRANA", model.getCity());
         assertEquals("ALBANIA", model.getCountry());
         assertEquals("Europe/Tirane", model.getTimeZone());
-        assertFalse(model.isHeadquarter());
+        assertTrue(model.isHeadquarter());
     }
 
     //one

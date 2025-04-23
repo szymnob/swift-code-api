@@ -37,34 +37,38 @@ public class SwiftCodeParser {
 
         while(rowIterator.hasNext()) {
             Row row = rowIterator.next();
-            if (row == null) continue;
+            if (row == null || isRowEmpty(row)) continue;
 
-            String countryISO2 = Objects.requireNonNull(getCellValue(row, 0)).toUpperCase();
-            String swiftCode = getCellValue(row, 1);
-            String codeType = getCellValue(row, 2);
-            String bankName = getCellValue(row, 3);
-            String address = getCellValue(row, 4);
-            String city = getCellValue(row, 5);
-            String country = Objects.requireNonNull(getCellValue(row, 6)).toUpperCase();
-            String timeZone = getCellValue(row, 7);
+            try {
+                String countryISO2 = Objects.requireNonNull(getCellValue(row, 0)).toUpperCase();
+                String swiftCode = getCellValue(row, 1);
+                String codeType = getCellValue(row, 2);
+                String bankName = getCellValue(row, 3);
+                String address = getCellValue(row, 4);
+                String city = getCellValue(row, 5);
+                String country = Objects.requireNonNull(getCellValue(row, 6)).toUpperCase();
+                String timeZone = getCellValue(row, 7);
 
-            if (swiftCode == null || swiftCode.isEmpty() || Objects.requireNonNull(swiftCode).length() < 8 ) continue;
+                if (swiftCode == null || swiftCode.isEmpty() || Objects.requireNonNull(swiftCode).length() < 8 ) continue;
 
-            boolean isHeadquarter = swiftCode.endsWith("XXX");
+                boolean isHeadquarter = swiftCode.endsWith("XXX");
 
 
-            SwiftCode swiftEntity = SwiftCode.builder()
-                    .swiftCode(swiftCode)
-                    .isHeadquarter(isHeadquarter)
-                    .countryISO2(countryISO2)
-                    .bankName(bankName)
-                    .address(address)
-                    .city(city)
-                    .country(country)
-                    .timeZone(timeZone)
-                    .build();
+                SwiftCode swiftEntity = SwiftCode.builder()
+                        .swiftCode(swiftCode)
+                        .isHeadquarter(isHeadquarter)
+                        .countryISO2(countryISO2)
+                        .bankName(bankName)
+                        .address(address)
+                        .city(city)
+                        .country(country)
+                        .timeZone(timeZone)
+                        .build();
 
-            readData.add(swiftEntity);
+                readData.add(swiftEntity);
+            } catch (Exception e) {
+                System.out.println("Error parsing row: " + e.getMessage());
+            }
         }
         repository.saveAll(readData);
         workbook.close();
@@ -84,6 +88,18 @@ public class SwiftCodeParser {
         }
         return cellValue;
 
+    }
+
+    private boolean isRowEmpty(Row row) {
+        if (row == null) return true;
+
+        for (int c = 0; c < 8; c++) {
+            String value = getCellValue(row, c);
+            if (value != null && !value.isBlank()) {
+                return false;
+            }
+        }
+        return true;
     }
 
 

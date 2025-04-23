@@ -7,8 +7,6 @@ import com.szymon.swiftcode.exceptions.DuplicateResourceException;
 import com.szymon.swiftcode.exceptions.ResourceNotFoundException;
 import com.szymon.swiftcode.model.SwiftCode;
 import com.szymon.swiftcode.repository.SwiftCodeRepository;
-import jakarta.inject.Inject;
-import org.apache.coyote.BadRequestException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
