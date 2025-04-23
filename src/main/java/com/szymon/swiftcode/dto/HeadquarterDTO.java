@@ -1,15 +1,16 @@
 package com.szymon.swiftcode.dto;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
-public class headquarterDTO extends branchDTO {
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+public class HeadquarterDTO extends BranchDTO {
 /*
     private String address;
     private String bankName;
@@ -19,6 +20,6 @@ public class headquarterDTO extends branchDTO {
     private String swiftCode;
 */
 
-    private List<branchDTO> branches;
+    private List<BranchDTO> branches;
 
 }

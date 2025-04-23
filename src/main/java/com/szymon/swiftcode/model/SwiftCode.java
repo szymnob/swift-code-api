@@ -8,6 +8,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
 public class SwiftCode {
     @Id
     @Column(name="id")
@@ -26,7 +27,7 @@ public class SwiftCode {
     @Column(name="bank_name", length=255)
     private String bankName;
 
-    @Column(name="adress")
+    @Column(name="address")
     private String address;
 
     @Column(name="city", length=255)

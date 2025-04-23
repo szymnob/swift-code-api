@@ -39,18 +39,18 @@ public class SwiftCodeParser {
             Row row = rowIterator.next();
             if (row == null) continue;
 
-            String countryISO2 = getCellValue(row, 0);
+            String countryISO2 = Objects.requireNonNull(getCellValue(row, 0)).toUpperCase();
             String swiftCode = getCellValue(row, 1);
             String codeType = getCellValue(row, 2);
             String bankName = getCellValue(row, 3);
             String address = getCellValue(row, 4);
             String city = getCellValue(row, 5);
-            String country = getCellValue(row, 6);
+            String country = Objects.requireNonNull(getCellValue(row, 6)).toUpperCase();
             String timeZone = getCellValue(row, 7);
 
             if (swiftCode == null || swiftCode.isEmpty() || Objects.requireNonNull(swiftCode).length() < 8 ) continue;
 
-            boolean isHeadquarter = codeType.endsWith("XXX");
+            boolean isHeadquarter = swiftCode.endsWith("XXX");
 
 
             SwiftCode swiftEntity = SwiftCode.builder()
