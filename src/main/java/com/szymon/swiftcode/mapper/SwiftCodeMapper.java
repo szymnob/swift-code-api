@@ -14,7 +14,7 @@ public class SwiftCodeMapper {
         dto.setBankName(model.getBankName());
         dto.setCountryISO2(model.getCountryISO2());
         dto.setCountryName(model.getCountry());
-        dto.setHeadquarter(model.isHeadquarter());
+        dto.setIsHeadquarter(model.isHeadquarter());
         dto.setSwiftCode(model.getSwiftCode());
 
         return dto;
@@ -28,7 +28,7 @@ public class SwiftCodeMapper {
         dto.setAddress(headquarter.getAddress());
         dto.setCountryISO2(headquarter.getCountryISO2());
         dto.setCountryName(headquarter.getCountry());
-        dto.setHeadquarter(true);
+        dto.setIsHeadquarter(true);
 
         List<BranchDTO> branchDTOs = branches.stream()
                 .map(SwiftCodeMapper::toBranchDTO)

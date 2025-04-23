@@ -77,7 +77,7 @@ public class SwiftCodeService {
                 .address(branchDTO.getAddress())
                 .countryISO2(branchDTO.getCountryISO2().toUpperCase())
                 .country(branchDTO.getCountryName().toUpperCase())
-                .isHeadquarter(branchDTO.isHeadquarter())
+                .isHeadquarter(branchDTO.getIsHeadquarter())
                 .build();
 
         repository.save(swiftCodeEntity);
